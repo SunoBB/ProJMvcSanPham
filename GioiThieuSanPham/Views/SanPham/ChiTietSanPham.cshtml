@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Danh sach san pham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int id = ViewBag.id;
+    var SanPham = new GioiThieuSanPham.Models.SanPhamModel().ThongTin(id);
+}
+
+
+@if (SanPham == null)
+{
+    <div class="center_title_bar">Sản phẩm k tồn tại</div>
+}
+else
+{
+    <div class="center_title_bar"> @SanPham.TenSanPham </div>
+    <div class="prod_box_big">
+        <div class="center_prod_box_big">
+            <div class="product_img_big">
+                <a href="javascript:popImage('~/theme/images/big_pic.jpg','Some Title')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="~/theme/images/p3.jpg" alt="" border="0"></a>
+                <div class="thumbs"> <a href="~/SanPham/ChiTietSanPham" title="header=[Thumb1] body=[&nbsp;] fade=[on]"><img src="~/theme/images/thumb1.jpg" alt="" border="0"></a> <a href="~/SanPham/ChiTietSanPham" title="header=[Thumb2] body=[&nbsp;] fade=[on]"><img src="~/theme/images/thumb2.jpg" alt="" border="0"></a> <a href="~/SanPham/ChiTietSanPham" title="header=[Thumb3] body=[&nbsp;] fade=[on]"><img src="~/theme/images/thumb1.jpg" alt="" border="0"></a> </div>
+            </div>
+            <div class="details_big_box">
+                <div class="product_title_big">
+                    <div>@SanPham.TenSanPham</div>
+                </div>
+                <div class="specifications">
+                    Số tháng bảo hành: <span class="blue">@SanPham.SoThangBaoHanh tháng</span><br>
+                    Hãng sản suất :<span class="blue"> @SanPham.HangSanXuat</span><br>
+                    Thông tin :<span class="blue"> @SanPham.TomTatThongTin </span><br>
+                </div>
+                <div class="prod_price_big"><span class="reduce">@string.Format("{0:#,0}", SanPham.GiaCu)</span> <span class="price">@string.Format("{0:#,0}", SanPham.GiaMoi)</span></div>
+                <a href="~/SanPham/ChiTietSanPham" class="prod_buy">add to cart</a>
+            </div>
+        </div>
+    </div>
+
+}

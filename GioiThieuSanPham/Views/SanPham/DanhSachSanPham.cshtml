@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Danh sach san pham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var DS_SanPham = ViewBag.listSanPham;
+}
+
+<div class="center_title_bar">Danh sách sản phẩm</div>
+@foreach (var item in DS_SanPham)
+{
+    <div class="prod_box">
+        <div class="center_prod_box">
+            <div class="product_title"><a href="~/SanPham/ChiTietSanPham?id=@item.ID">@item.TenSanPham</a></div>
+            <div class="product_img"><a href="~/SanPham/ChiTietSanPham?id=@item.ID"><img src="~/theme/images/p1.jpg" alt="" border="0" /></a></div>
+            <div class="prod_price">
+            <span class="reduce">@string.Format("{0:#,0}", @item.GiaCu)</span> 
+            <span class="price">@string.Format("{0:#,0}", @item.GiaMoi)</span></div>
+        </div>
+        <div class="prod_details_tab"> <a href="~/SanPham/ChiTietSanPham?id=@item.ID" class="prod_buy">Add to Cart</a> <a href="~/SanPham/ChiTietSanPham" class="prod_details">Details</a> </div>
+    </div>
+}
+
