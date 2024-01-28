@@ -10,11 +10,7 @@ namespace GioiThieuSanPham.Controllers
     public class SanPhamController : Controller
     {
         // GET: SanPham
-        public ActionResult ShowDanhSach()
-        {
-            var listSanPham = new DBconnect().SanPhams.ToList();
-            return View(listSanPham); // View DB
-        }
+        // CRUD db here
 
         public ActionResult DanhSachSanPham()
         {
