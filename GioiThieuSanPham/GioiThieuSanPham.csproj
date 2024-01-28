@@ -321,6 +321,7 @@
     <Content Include="Views\SanPham\XemTheoLoai.cshtml" />
     <Content Include="Views\SanPham\ShowDanhSach.cshtml" />
     <Content Include="Views\SanPham\ThemMoi.cshtml" />
+    <Content Include="Views\SanPham\CapNhat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

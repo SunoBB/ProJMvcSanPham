@@ -66,5 +66,41 @@ namespace GioiThieuSanPham.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult CapNhat(int id)
+        {
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            // Get product by id
+            SanPham sanPhamModel = db.SanPhams.Find(id);
+
+            return View(sanPhamModel) ;
+        }
+        [HttpPost]
+        public ActionResult CapNhat(SanPham model)
+        {
+            if (string.IsNullOrEmpty(model.TenSanPham))
+            {
+                ModelState.AddModelError("TenSanPham", "Tên sản phẩm không được để trống");
+                return View(model);
+            }
+            if (model.GiaBanMoi <= 0)
+            {
+                ModelState.AddModelError("GiaBanMoi", "Giá bán mới phải lớn hơn 0");
+                return View(model);
+            }
+            // Save
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            var id = db.SaveChanges();
+            if ( id > 0)
+            {
+                return RedirectToAction("DanhSachSanPham");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật không thành công");
+                return View(model);
+            }
+
+        }
     }
 }
