@@ -1,18 +1,21 @@
-﻿@{
+﻿@using GioiThieuSanPham.Models;
+@model GioiThieuSanPham.Models.SanPham
+
+@{
     ViewBag.Title = "Danh sach san pham";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    int id = ViewBag.id;
-    var SanPham = new GioiThieuSanPham.Models.SanPhamModel().ThongTin(id);
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+    QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+    HangSanXuat hangSX = db.HangSanXuats.Find(Model.idHang);
 }
 
 
-@if (SanPham == null)
+@if (Model == null)
 {
     <div class="center_title_bar">Sản phẩm k tồn tại</div>
 }
 else
 {
-    <div class="center_title_bar"> @SanPham.TenSanPham </div>
+    <div class="center_title_bar"> @Model.TenSanPham </div>
     <div class="prod_box_big">
         <div class="center_prod_box_big">
             <div class="product_img_big">
@@ -21,14 +24,21 @@ else
             </div>
             <div class="details_big_box">
                 <div class="product_title_big">
-                    <div>@SanPham.TenSanPham</div>
+                    <div>@Model.TenSanPham</div>
                 </div>
                 <div class="specifications">
-                    Số tháng bảo hành: <span class="blue">@SanPham.SoThangBaoHanh tháng</span><br>
-                    Hãng sản suất :<span class="blue"> @SanPham.HangSanXuat</span><br>
-                    Thông tin :<span class="blue"> @SanPham.TomTatThongTin </span><br>
+                    
+                    Hãng sản suất :
+                           @if(hangSX != null)
+                            {
+                                <span class="blue">@hangSX.TenHang</span>
+                            }
+                    <br>
+                    Thông tin :<span class="blue"> @Model.TomTat </span><br>
                 </div>
-                <div class="prod_price_big"><span class="reduce">@string.Format("{0:#,0}", SanPham.GiaCu)</span> <span class="price">@string.Format("{0:#,0}", SanPham.GiaMoi)</span></div>
+                <div class="prod_price_big">
+                    <span class="reduce">@string.Format("{0:#,0}", Model.GiaBanCu)</span> 
+                    <span class="price">@string.Format("{0:#,0}", Model.GiaBanMoi)</span></div>
                 <a href="~/SanPham/ChiTietSanPham" class="prod_buy">add to cart</a>
             </div>
         </div>

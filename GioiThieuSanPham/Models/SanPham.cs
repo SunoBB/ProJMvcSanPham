@@ -15,12 +15,12 @@ namespace GioiThieuSanPham.Models
     public partial class SanPham
     {
         public int ID { get; set; }
-        public string TeSanPham { get; set; }
         public Nullable<decimal> GiaBanCu { get; set; }
         public Nullable<decimal> GiaBanMoi { get; set; }
         public string TomTat { get; set; }
         public string BaiViet { get; set; }
         public Nullable<int> idHang { get; set; }
+        public string TenSanPham { get; set; }
     
         public virtual HangSanXuat HangSanXuat { get; set; }
     }

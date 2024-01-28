@@ -1,35 +1,70 @@
-﻿using GioiThieuSanPham.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GioiThieuSanPham.Models;
+
 
 namespace GioiThieuSanPham.Controllers
 {
     public class SanPhamController : Controller
     {
         // GET: SanPham
-        // CRUD db here
-
         public ActionResult DanhSachSanPham()
         {
-            var listSanPham = new GioiThieuSanPham.Models.SanPhamModel().DanhSach();
-            ViewBag.listSanPham = listSanPham;
-            return View();
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            // Get list of products
+            List<SanPham> KetQua = db.SanPhams.ToList();
+
+            return View(KetQua);
         }
 
         public ActionResult ChiTietSanPham(int id)
         {
-            ViewBag.id = id;
-            return View();
+
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            // Get product by id
+            SanPham KetQua = db.SanPhams.Find(id);
+
+            return View(KetQua);
         }
 
-        public ActionResult XemTheoLoai(string tenLoai, int?page) 
+        public ActionResult ThemMoi()
         {
-            ViewBag.page = page??1;
-            ViewBag.tenLoai = tenLoai;
-            return View();
+            return View(new SanPham() { GiaBanCu = 0, GiaBanMoi = 0});
+        }
+
+        [HttpPost]
+        public ActionResult ThemMoi(SanPham model)
+        {
+            // Save new data to database
+            if (string.IsNullOrEmpty(model.TenSanPham))
+            {
+                ModelState.AddModelError("TenSanPham", "Tên sản phẩm không được để trống");
+                return View(model);
+            }
+            if (model.GiaBanMoi <= 0)
+            {
+                ModelState.AddModelError("GiaBanMoi", "Giá bán mới phải lớn hơn 0");
+                return View(model);
+            }
+            // Save new data to database
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            // Func add new product
+            db.SanPhams.Add(model);
+
+            // Save to database
+            db.SaveChanges();
+            if (model.ID > 0)
+            {
+                return RedirectToAction("DanhSachSanPham"); // Redirect to list of products
+            }
+            else
+            {
+                ModelState.AddModelError("", "Thêm mới không thành công");
+                return View(model);
+            }
         }
     }
 }
