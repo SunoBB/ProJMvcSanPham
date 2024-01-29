@@ -18,7 +18,9 @@
                 <span class="price">@string.Format("{0:#,0}", @item.GiaBanMoi)</span>
             </div>
         </div>
-        <div class="prod_details_tab"> <a href="~/SanPham/ChiTietSanPham?id=@item.ID" class="prod_buy">Add to Cart</a> <a href="~/SanPham/ChiTietSanPham" class="prod_details">Details</a> </div>
+        <div class="prod_details_tab"> 
+        <a href="~/SanPham/Xoa?id=@item.ID" class="prod_buy">Xoá</a>
+        <a href="~/SanPham/ChiTietSanPham?id=@item.ID" class="prod_details">Chi tiết</a> </div>
     </div>
 }
 

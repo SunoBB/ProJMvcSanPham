@@ -113,5 +113,17 @@ namespace GioiThieuSanPham.Controllers
             }
 
         }
+        
+        public ActionResult Xoa(int id)
+        {
+            QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            var model = db.SanPhams.Find(id);
+            db.SanPhams.Remove(model);
+            db.SaveChanges();
+
+            return RedirectToAction("DanhSachSanPham");
+        }
+
+
     }
 }

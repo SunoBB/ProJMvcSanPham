@@ -63,12 +63,12 @@
             @{
                 GioiThieuSanPham.Models.QuanLySanPham_DBEntities db = new GioiThieuSanPham.Models.QuanLySanPham_DBEntities();
                 var hangs = db.HangSanXuats.ToList();
-                <select name="idHang">
-                    @foreach (var item in hangs)
-                    {
-                        <option value="@item.ID">@item.TenHang</option>
-                    }
-                </select>
+                        <select name="idHang">
+                            @foreach (var item in hangs)
+                            {
+                                <option value="@item.ID" @(item.ID == Model.idHang ? "selected" : "")>@item.TenHang</option>
+                            }
+                        </select>
             }
             @Html.ValidationMessageFor(model => model.idHang, "", new { @class = "text-danger" })
         </div>
