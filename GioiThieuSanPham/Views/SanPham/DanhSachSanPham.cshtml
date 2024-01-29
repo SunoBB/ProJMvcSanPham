@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="prod_details_tab"> 
-        <a href="~/SanPham/Xoa?id=@item.ID" class="prod_buy">Xoá</a>
+        <a href="#" onclick="if (confirm('Bạn có chắc muốn xoá không?') == true) { location.href='/SanPham/Xoa?id=@item.ID'}" class="prod_buy">Xoá</a>
         <a href="~/SanPham/ChiTietSanPham?id=@item.ID" class="prod_details">Chi tiết</a> </div>
     </div>
 }
