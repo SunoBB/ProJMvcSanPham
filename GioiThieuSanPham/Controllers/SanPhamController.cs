@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using GioiThieuSanPham.Models;
-
-
 namespace GioiThieuSanPham.Controllers
+
 {
     public class SanPhamController : Controller
     {
@@ -15,9 +13,13 @@ namespace GioiThieuSanPham.Controllers
         {
             QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
             // Get list of products
-            List<SanPham> KetQua = db.SanPhams.ToList();
+            /*List<SanPham> KetQua = db.SanPhams.ToList();*/
 
-            return View(KetQua);
+            //Truy vấn toàn bộ: Select * from SanPham
+            var Kq = (from item in db.SanPhams
+                      select item).ToList();
+
+            return View(Kq);
         }
 
         public ActionResult ChiTietSanPham(int id)
