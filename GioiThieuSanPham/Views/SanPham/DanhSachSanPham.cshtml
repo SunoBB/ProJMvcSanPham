@@ -1,11 +1,11 @@
-﻿@Model List<GioiThieuSanPham.Models.SanPham>
+﻿@model IEnumerable<GioiThieuSanPham.Models.SanPham>
 @{
     ViewBag.Title = "Danh sach san pham";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="center_title_bar">Danh sách sản phẩm</div>
-<a href="/SanPham/ThemMoi">Thêm mới</a>
+<a href="~/SanPham/ThemMoi">Thêm mới</a>
 <hr />
 @foreach (var item in Model)
 {

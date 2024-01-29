@@ -90,6 +90,17 @@ namespace GioiThieuSanPham.Controllers
             }
             // Save
             QuanLySanPham_DBEntities db = new QuanLySanPham_DBEntities();
+            //1. Find product by id want edit
+
+            var updateModel = db.SanPhams.Find(model.ID);
+            // 
+            updateModel.TenSanPham = model.TenSanPham;
+            updateModel.GiaBanCu = model.GiaBanCu;
+            updateModel.GiaBanMoi = model.GiaBanMoi;
+            updateModel.BaiViet = model.BaiViet;
+            updateModel.idHang = model.idHang;
+            updateModel.TomTat = model.TomTat;
+
             var id = db.SaveChanges();
             if ( id > 0)
             {
